@@ -40,3 +40,8 @@ class MogodbManager:
     async def delete(self, collection_name, _id):
         result = self.database[collection_name].delete_one({"_id":ObjectId(_id)})
         return result.deleted_count
+
+
+async def sess_db():
+    notification_db = MogodbManager("notification_db")
+    return notification_db
