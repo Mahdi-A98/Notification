@@ -1,0 +1,27 @@
+services:
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - accountnetwork
+
+  app:
+    build: .
+    container_name: account_app
+    ports:
+      - 8002:8002
+    volumes:
+      - .:/code/
+    depends_on:
+      - mongodb
+    networks:
+      - accountnetwork
+
+networks:
+  accountnetwork:
+
+volumes:
+  dbdata6:
